@@ -187,7 +187,7 @@ public class Program
         ;*/
         DoubleLinkedList list3 = new DoubleLinkedList();
         Book b1 = new Book( "Gone with the Wind",
-                            "Magarette Michele",
+                            "Margaret Mitchell",
                             100000);
         list3.Insert(b1, "Header");
         Book b2 = new Book( "Kieu's Story",
