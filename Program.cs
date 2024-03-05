@@ -77,60 +77,92 @@ public class LinkedList
             current = current.link;
         }
     }
-    class Node2
+}
+class Book
+{
+    public string title, author;
+    public long price;
+    public Book(string title, string author, long price)
     {
-        public object element;
-        public Node2 flink, blink;
-        public Node2()
-        {
-            element = null;
-            flink = blink = null;
-        }
-        public Node2(object element)
-        {
-            this.element = element;
-            flink = blink = null;
-        }
-
+        this.title = title;
+        this.author = author;
+        this.price = price;
     }
-    class DoubleLinkedList
+    override public string ToString()
     {
-        public Node2 header;
-        public DoubleLinkedList()
-        {
-            header = new Node2("Header");
-        }
-        private Node2 Find(object element)
-        {
-            Node2 current = new Node2();
-            current = header;
-            while (current.element != element)
-            {
-                current = current.flink;
-            }
-            return current;
-        }
-        public void Insert(object newelement, object afterelement)
-        {
-            Node2 current = new Node2();
-            Node2 newnode = new Node2(newelement);
-            current = Find(afterelement);
-            newnode.flink = current.flink;
-            newnode.blink = current;
-            current.flink = newnode;
-        }
-        public void Remove(object element)
-        {
-            Node2 current = Find(element);
-            if (current.flink != null)
-            {
-                current.blink.flink = current.flink;
-                current.flink.blink = current.blink;
-                current.flink = null;
-                current.blink = null;
-            }
-        }
+        return $"[Book: {title}, {author}, {price}]";
+    }
+}
+public class Node2
+{
+    public object element;
+    public Node2 flink, blink;
+    public Node2()
+    {
+        element = null;
+        flink = blink = null;
+    }
+    public Node2(object element)
+    {
+        this.element = element;
+        flink = blink = null;
+    }
 
+}
+public class DoubleLinkedList
+{
+    public Node2 header;
+    public DoubleLinkedList()
+    {
+        header = new Node2("Header");
+    }
+    private Node2 Find(object element)
+    {
+        Node2 current = new Node2();
+        current = header;
+        while (current.element != element)
+        {
+            current = current.flink;
+        }
+        return current;
+    }
+    public void Insert(object newelement, object afterelement)
+    {
+        Node2 current = new Node2();
+        Node2 newnode = new Node2(newelement);
+        current = Find(afterelement);
+        newnode.flink = current.flink;
+        newnode.blink = current;
+        current.flink = newnode;
+    }
+    public void Remove(object element)
+    {
+        Node2 current = Find(element);
+        if (current.flink != null)
+        {
+            current.blink.flink = current.flink;
+            current.flink.blink = current.blink;
+            current.flink = null;
+            current.blink = null;
+        }
+    }
+    private Node2 FindLast()
+    {
+        Node2 current = new Node2();
+        current = header;
+        while (!(current.flink == null))
+            current = current.flink;
+        return current;
+    }
+    public void Print()
+    {
+        Node2 current = new Node2();
+        current = FindLast();
+        while (!(current.blink == null))
+        {
+            Console.WriteLine(current.element as Book);
+            current = current.blink;
+        }
     }
 }
 public class Program
@@ -153,5 +185,21 @@ public class Program
         ;
         list2.Sort();
         ;*/
+        DoubleLinkedList list3 = new DoubleLinkedList();
+        Node2 n1 = new Node2()
+        {
+            element = new Book("Gone with the Wind",
+                                "Mark Twain",
+                                100000)
+        };
+        list3.Insert(n1, "Header");
+        Node2 n2 = new Node2()
+        {
+            element = new Book("Kieu's Story",
+                                "Nguyen Du",
+                                120000)
+        };
+        list3.Insert(n2, n1);
+        list3.Print();
     }
 }
