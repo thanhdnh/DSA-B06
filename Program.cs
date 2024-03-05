@@ -186,20 +186,14 @@ public class Program
         list2.Sort();
         ;*/
         DoubleLinkedList list3 = new DoubleLinkedList();
-        Node2 n1 = new Node2()
-        {
-            element = new Book("Gone with the Wind",
-                                "Mark Twain",
-                                100000)
-        };
-        list3.Insert(n1, "Header");
-        Node2 n2 = new Node2()
-        {
-            element = new Book("Kieu's Story",
-                                "Nguyen Du",
-                                120000)
-        };
-        list3.Insert(n2, n1);
+        Book b1 = new Book( "Gone with the Wind",
+                            "Magarette Michele",
+                            100000);
+        list3.Insert(b1, "Header");
+        Book b2 = new Book( "Kieu's Story",
+                            "Nguyen Du",
+                            120000);
+        list3.Insert(b2, b1);
         list3.Print();
     }
 }
