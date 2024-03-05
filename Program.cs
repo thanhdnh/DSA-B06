@@ -1,4 +1,6 @@
-﻿public class Node{
+﻿using System.ComponentModel;
+
+public class Node{
     public object element;//data
     public Node link;//liên kết
     public Node(){
@@ -38,17 +40,48 @@ public class LinkedList{
         if(current.link!=null)
             current.link = current.link.link;
     }
+    public void Swap(object o1, object o2){
+        object n1 = FindPrev(o1).element;
+        object n2 = FindPrev(o2).element;
+        Remove(o1);
+        Remove(o2);
+        Insert(o1, n2);
+        Insert(o2, n1);
+    }
+    public void Sort(){
+        Begin:
+        Node current = header.link;
+        while(current.link!= null){
+            Node current2 = current.link;
+            while(current2!=null){
+                if((int)current.element > (int)current2.element){
+                    Swap(current2.element, current.element);
+                    goto Begin;
+                }
+                current2 = current2.link;
+            }
+            current = current.link;
+        }
+    }
 }
-public class Program
-{
+public class Program{
     public static void Main(string[] args)
     {
-        LinkedList list = new LinkedList();
+        /*LinkedList list = new LinkedList();
         list.Insert("Milk", "header");
         list.Insert("Bread", "Milk");
         list.Insert("Eggs", "Bread");
         ;
-        list.Remove("Bread");
+        //list.Remove("Bread");
+        list.Swap("Milk", "Eggs");
+        ;*/
+        LinkedList list2 = new LinkedList();
+        list2.Insert(9, "header");
+        list2.Insert(5, 9);
+        list2.Insert(7, 5);
+        list2.Insert(3, 7);
+        ;
+        list2.Sort();
         ;
     }
 }
