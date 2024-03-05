@@ -1,46 +1,56 @@
 ﻿using System.ComponentModel;
 
-public class Node{
+public class Node
+{
     public object element;//data
     public Node link;//liên kết
-    public Node(){
+    public Node()
+    {
         this.element = null;
         this.link = null;
     }
-    public Node(object element){
+    public Node(object element)
+    {
         this.element = element;
         this.link = null;
     }
 }
-public class LinkedList{
+public class LinkedList
+{
     public Node header;//Nút đầu
-    public LinkedList(){
+    public LinkedList()
+    {
         header = new Node("header");
     }
-    public Node Find(object ele){
+    public Node Find(object ele)
+    {
         Node current = header;
-        while(!current.element.Equals(ele) && current.link!= null)
+        while (!current.element.Equals(ele) && current.link != null)
             current = current.link;
         return current;
     }
-    public void Insert(object newele, object after){
+    public void Insert(object newele, object after)
+    {
         Node current = Find(after);
         Node newNode = new Node(newele);
         newNode.link = current.link;
         current.link = newNode;
     }
-    public Node FindPrev(object ele){
+    public Node FindPrev(object ele)
+    {
         Node current = header;
-        while(!current.link.element.Equals(ele) && current.link!= null)
+        while (!current.link.element.Equals(ele) && current.link != null)
             current = current.link;
         return current;
     }
-    public void Remove(object ele){
+    public void Remove(object ele)
+    {
         Node current = FindPrev(ele);
-        if(current.link!=null)
+        if (current.link != null)
             current.link = current.link.link;
     }
-    public void Swap(object o1, object o2){
+    public void Swap(object o1, object o2)
+    {
         object n1 = FindPrev(o1).element;
         object n2 = FindPrev(o2).element;
         Remove(o1);
@@ -48,13 +58,17 @@ public class LinkedList{
         Insert(o1, n2);
         Insert(o2, n1);
     }
-    public void Sort(){
-        Begin:
+    public void Sort()
+    {
+    Begin:
         Node current = header.link;
-        while(current.link!= null){
+        while (current.link != null)
+        {
             Node current2 = current.link;
-            while(current2!=null){
-                if((int)current.element > (int)current2.element){
+            while (current2 != null)
+            {
+                if ((int)current.element > (int)current2.element)
+                {
                     Swap(current2.element, current.element);
                     goto Begin;
                 }
@@ -63,8 +77,64 @@ public class LinkedList{
             current = current.link;
         }
     }
+    class Node2
+    {
+        public object element;
+        public Node2 flink, blink;
+        public Node2()
+        {
+            element = null;
+            flink = blink = null;
+        }
+        public Node2(object element)
+        {
+            this.element = element;
+            flink = blink = null;
+        }
+
+    }
+    class DoubleLinkedList
+    {
+        public Node2 header;
+        public DoubleLinkedList()
+        {
+            header = new Node2("Header");
+        }
+        private Node2 Find(object element)
+        {
+            Node2 current = new Node2();
+            current = header;
+            while (current.element != element)
+            {
+                current = current.flink;
+            }
+            return current;
+        }
+        public void Insert(object newelement, object afterelement)
+        {
+            Node2 current = new Node2();
+            Node2 newnode = new Node2(newelement);
+            current = Find(afterelement);
+            newnode.flink = current.flink;
+            newnode.blink = current;
+            current.flink = newnode;
+        }
+        public void Remove(object element)
+        {
+            Node2 current = Find(element);
+            if (current.flink != null)
+            {
+                current.blink.flink = current.flink;
+                current.flink.blink = current.blink;
+                current.flink = null;
+                current.blink = null;
+            }
+        }
+
+    }
 }
-public class Program{
+public class Program
+{
     public static void Main(string[] args)
     {
         /*LinkedList list = new LinkedList();
@@ -75,13 +145,13 @@ public class Program{
         //list.Remove("Bread");
         list.Swap("Milk", "Eggs");
         ;*/
-        LinkedList list2 = new LinkedList();
+        /*LinkedList list2 = new LinkedList();
         list2.Insert(9, "header");
         list2.Insert(5, 9);
         list2.Insert(7, 5);
         list2.Insert(3, 7);
         ;
         list2.Sort();
-        ;
+        ;*/
     }
 }
