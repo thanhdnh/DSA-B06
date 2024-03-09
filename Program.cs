@@ -78,6 +78,7 @@ public class LinkedList
         }
     }
 }
+#region 
 class Book
 {
     public string title, author;
@@ -165,6 +166,7 @@ public class DoubleLinkedList
         }
     }
 }
+#endregion
 public class Program
 {
     public static void Main(string[] args)
